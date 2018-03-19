@@ -31,7 +31,7 @@ public class testBanque {
 		banque3.setNom("LCL");
 
 
-		Set<Client> clientCompte = new HashSet<Client>();
+		Set<Client> clients = new HashSet<Client>();
 			
 		Client client = new Client();
 		Client client1 = new Client();
@@ -56,10 +56,10 @@ public class testBanque {
 		client1.setBanque(banque1);
 		client2.setBanque(banque3);
 		client3.setBanque(banque2);
-		clientCompte.add(client);
-		clientCompte.add(client1);
-		clientCompte.add(client2);
-		clientCompte.add(client3);
+		clients.add(client);
+		clients.add(client1);
+		clients.add(client2);
+		clients.add(client3);
 		
 		
 		Adresse adresse = new Adresse();
@@ -74,65 +74,73 @@ public class testBanque {
 		client3.setAdresse(adresse);
 		
 		
-		
 		Set<Compte> compteClient = new HashSet<Compte>();
 		Set<Compte> compteClient1 = new HashSet<Compte>();
 		Set<Compte> compteClient2 = new HashSet<Compte>();
 		Set<Compte> compteClient3 = new HashSet<Compte>();
 		
-		Compte compte = new Compte();
-		Compte compte1 = new Compte();
-		Compte compte2 = new Compte();
-		Compte compte3 = new Compte();
+		LivretA livret = new LivretA();
+		LivretA livret1 = new LivretA();
+		AssuranceVie assuranceVie = new AssuranceVie();
+		AssuranceVie assuranceVie1 = new AssuranceVie();
+		
+		
+		livret.setSolde(10256);
+		livret.setNumero("abc");
+		livret.setTaux(10);
+		livret1.setSolde(2684);
+		livret1.setNumero("abc");
+		livret1.setTaux(12);
+		assuranceVie.setSolde(356);
+		assuranceVie.setNumero("abc");
+		assuranceVie.setTaux(20);
+		assuranceVie.setDateFin(LocalDate.of(2017, 02, 25));
+		assuranceVie1.setSolde(150);
+		assuranceVie1.setNumero("abc");
+		assuranceVie1.setTaux(32);
+		assuranceVie1.setDateFin(LocalDate.of(2017, 03, 24));
+
+		compteClient.add(livret);
+		compteClient1.add(livret1);
+		compteClient2.add(assuranceVie);
+		compteClient3.add(assuranceVie1);
+		
 	
-		
-		compte.setSolde(10256);
-		compte.setNumero("abc");
-		compte1.setSolde(2684);
-		compte1.setNumero("abc");
-		compte2.setSolde(356);
-		compte2.setNumero("abc");
-		compte3.setSolde(150);
-		compte3.setNumero("abc");
-		compteClient.add(compte);
-		compteClient1.add(compte1);
-		compteClient2.add(compte2);
-		compteClient3.add(compte3);
-		
-		
 		client.setCompte(compteClient);
-		client1.setCompte(compteClient1);
 		client2.setCompte(compteClient2);
 		client1.setCompte(compteClient3);
-		client3.setCompte(compteClient);
+		client3.setCompte(compteClient1);
 		
-		clientCompte.add(client);
-		clientCompte.add(client1);
-		clientCompte.add(client2);
-		clientCompte.add(client3);
+		clients.add(client);
+		clients.add(client1);
+		clients.add(client2);
+		clients.add(client3);
 	
 		
 		Set<Operation> operations = new HashSet<Operation>();
-		Operation operation = new Operation();
-		Operation operation1 = new Operation();
-		Operation operation2 = new Operation();
+		Virement operation = new Virement();
+		Virement operation1 = new Virement();
+		Virement operation2 = new Virement();
 		operation.setDate(LocalDateTime.now());
 		operation.setMontant(156);
+		operation.setBeneficiaire("François");
 		operation.setModif("bibliotheque");
 		operation1.setMontant(2530);
 		operation1.setModif("voiture");
+		operation1.setBeneficiaire("Alice");
 		operation1.setDate(LocalDateTime.now());
 		operation2.setMontant(460);
 		operation2.setModif("pc");
 		operation2.setDate(LocalDateTime.now());
+		operation2.setBeneficiaire("loise");
 		
 		
 		operations.add(operation);
 		operations.add(operation1);
 		operations.add(operation2);
-		operation.setCompte(compte);
-		operation1.setCompte(compte1);
-		operation2.setCompte(compte3);
+		operation.setCompte(livret);
+		operation1.setCompte(livret1);
+		operation2.setCompte(assuranceVie1);
 		
 		
 		em.persist(banque);
@@ -146,10 +154,10 @@ public class testBanque {
 		em.persist(client3);
 		
 		
-		em.persist(compte);
-		em.persist(compte1);
-		em.persist(compte2);
-		em.persist(compte3);	
+		em.persist(livret);
+		em.persist(livret1);
+		em.persist(assuranceVie);
+		em.persist(assuranceVie1);	
 		
 		em.persist(operation);
 		em.persist(operation1);
@@ -160,7 +168,6 @@ public class testBanque {
 		
 		em.close();
 		entityManagerFactory.close();
-		//em = entityManagerFactory.createEntityManager();
 
 	}
 }

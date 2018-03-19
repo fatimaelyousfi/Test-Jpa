@@ -1,20 +1,36 @@
-/*package banque;
+package banque;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+
 
 @Entity
-@Table(name = "Virement")
-public class Virement {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-
-	@Column(name = "beneficiaire", length = 50, nullable = false)
+public class Virement extends Operation {
+	
 	private String beneficiaire;
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Virement [beneficiaire=" + beneficiaire + "]";
+	}
+
+	/**
+	 * @return the beneficiaire
+	 */
+	public String getBeneficiaire() {
+		return beneficiaire;
+	}
+
+	/**
+	 * @param beneficiaire the beneficiaire to set
+	 */
+	public void setBeneficiaire(String beneficiaire) {
+		this.beneficiaire = beneficiaire;
+	}
+
+	
 }
-*/
